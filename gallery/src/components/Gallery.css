@@ -1,0 +1,17 @@
+.gallery__page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.gallery__container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  min-height: 100dvh;
+  max-height: 300dvh;
+  overflow: hidden;
+  align-items: center;
+}
+.gallery__container img {
+  width: calc(calc(25%));
+}

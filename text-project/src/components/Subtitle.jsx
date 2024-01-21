@@ -1,6 +1,6 @@
 
-export const Subtitle = () => {
+export const Subtitle = ({text}) => {
   return (
-    <h2>Primera prueba en React</h2>
+    <h2>{text}</h2>
   )
 }

@@ -1,16 +1,16 @@
 import './App.css'
 import Title from './components/Title'
 import { Subtitle } from './components/Subtitle'
-import { Banner } from './components/Banner'
+import { Counter } from './components/Counter'
 
 function App() {
 
   return (
-    <>
-      <Banner />
-      <Title />
-      <Subtitle />
-    </>
+    <section className='containerApp'>
+      <Title text="Contandor" />
+      <Subtitle text="Primer contador" />
+      <Counter />
+    </section>
   )
 }
 

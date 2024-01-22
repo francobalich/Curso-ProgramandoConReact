@@ -13,7 +13,6 @@ export const NavBar = () => {
           <div className="collapse navbar-collapse " id="navbarNav">
             <div className="navbar-nav w-100 justify-content-between">
               <ul className="navbar-nav">
-                <ItemNavBar text="Inicio" />
               </ul>
               <ul className="navbar-nav">
                 <ItemNavBar text="Iniciar sesión" />

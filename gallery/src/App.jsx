@@ -1,18 +1,15 @@
-import { useState } from 'react'
 import './App.css'
-import { Gallery } from './components/Gallery'
-import { NavBar } from './components/NavBar'
 import { GalleryPage, LoginPage, RegisterPage } from './page'
-
+import { NavBar } from './components'
 
 function App() {
-  const [user, setUser] = useState("autenticado")
+  const user = "autenticado"
 
   return (
     <section className='app'>
       <NavBar />
       {
-        (user === "autenicado")
+        (user === "no-autenticado")
           ? <GalleryPage />
           : <>
             <LoginPage />

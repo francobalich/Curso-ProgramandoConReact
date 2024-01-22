@@ -11,6 +11,8 @@
   max-height: 300dvh;
   overflow: hidden;
   align-items: center;
+  gap: 10px;
+  width: 80%;
 }
 .gallery__container img {
   width: calc(calc(25%));

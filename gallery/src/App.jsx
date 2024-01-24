@@ -1,21 +1,12 @@
 import './App.css'
-import { GalleryPage, LoginPage, RegisterPage } from './page'
+import { AppRouter } from './Router/AppRouter'
 import { NavBar } from './components'
 
 function App() {
-  const user = "autenticado"
-
   return (
     <section className='app'>
       <NavBar />
-      {
-        (user === "no-autenticado")
-          ? <GalleryPage />
-          : <>
-            <LoginPage />
-            {/* <RegisterPage /> */}
-          </>
-      }
+      <AppRouter />
     </section>
   )
 }

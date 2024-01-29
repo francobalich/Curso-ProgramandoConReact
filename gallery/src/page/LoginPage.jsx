@@ -36,6 +36,7 @@ export const LoginPage = () => {
       state: 'authenticated'
     }
     setUser(resp)
+    localStorage.setItem('user',JSON.stringify(resp))
     navigate('/home')
     } catch (error) {
       Swal.fire({

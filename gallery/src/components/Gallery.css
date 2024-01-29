@@ -14,6 +14,6 @@
   gap: 10px;
   width: 80%;
 }
-.gallery__container img {
+.imgGallery {
   width: calc(calc(25%));
 }

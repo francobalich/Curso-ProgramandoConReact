@@ -7,6 +7,7 @@ export const NavBar = () => {
   const { user, setUser, userEmpty } = useContext(UserContext)
   const handleCloseSesion = () => {
     setUser(userEmpty)
+    localStorage.clear()
   }
   return (
     <>

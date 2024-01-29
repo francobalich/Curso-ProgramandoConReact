@@ -4,24 +4,13 @@ import { useContext, useEffect, useState } from "react"
 import { UserContext } from "../context/UserContext"
 
 export const AppRouter = () => {
-  const { user } = useContext(UserContext)
-  //const [routesList, setRoutesList] = useState(<></>)
-  // const addRoutes = () => {
-  //   if (user.state === 'authenticated')
-  //     return (<>
-  //       <Route path='/home' element={<GalleryPage />} />
-  //       <Route path='/auth/*' element={<Navigate to='/home' />} />
-  //     </>)
-  //   else {
-  //     return (<>
-  //       <Route path='/auth/login' element={<LoginPage />} />
-  //       <Route path='/auth/register' element={<RegisterPage />} />
-  //     </>)
-  //   }
-  // }
-  // useEffect(() => {
-  //   setRoutesList(addRoutes())
-  // }, [user])
+  const { user,setUser } = useContext(UserContext)
+  useEffect(() => {
+    const readUser=JSON.parse(localStorage.getItem('user'))
+    if(readUser!=undefined){
+      setUser(readUser)
+    }
+  }, [])
 
   return (
     <>
@@ -40,7 +29,6 @@ export const AppRouter = () => {
               <Route path='/*' element={<Navigate to='/auth/login' />} />
             </>
         }
-        
       </Routes>
     </>
   )

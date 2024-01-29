@@ -7,6 +7,7 @@ export const UserProvider = ({ children }) => {
     surname: '',
     email: '',
     state: 'not-authenticated'
+    //lastKeyword
   }
 
   const [user, setUser] = useState(userEmpty)

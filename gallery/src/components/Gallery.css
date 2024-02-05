@@ -1,5 +1,6 @@
 .gallery__page {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -19,7 +20,20 @@
 .imgGallery {
   width: calc(calc(25%));
 }
+.input_container{
+  display: flex;
+  gap: 10px;
+  flex-direction: row;
 
+}
+.loadingSvg{
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-weight: bold;
+}
 @media screen and (max-width:1300px) {
   .imgGallery {
     width: calc(calc(33%));

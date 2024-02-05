@@ -1,36 +1,53 @@
-import { useState } from "react";
 import './LoginPage.css'
-import Swal from 'sweetalert2'
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+import { useForm, useValidations,useApi } from "../hooks";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "../hooks/useForm";
-import { useValidations } from "../hooks/useValidations";
+import Swal from 'sweetalert2'
 
 const initialState = {
+  name: '',
+  surname: '',
   email: '',
   pws: '',
   pwsConfirm: ''
 }
 
 export const RegisterPage = () => {
-  const { email, pws, pwsConfirm, onInputChange } = useForm(initialState)
+  const { name, surname, email, pws, pwsConfirm, onInputChange } = useForm(initialState)
   const navigate = useNavigate()
-  const { validateRegister } = useValidations({ email, pws, pwsConfirm })
+  const { validateRegister } = useValidations({ name, surname, email, pws, pwsConfirm })
+  const { getUserRegister } = useApi()
+
+  const submitRegister = (data) => {
+    getUserRegister(data).then((resp) => {
+      const { data } = resp
+      const simpleUser = {
+        name: data.name,
+        surname: data.surname,
+        email: data.email,
+        state: 'authenticated'
+      }
+
+      Swal.fire({
+        title: 'Se registro un nuevo usuario',
+        text: `Usuario: ${data.name}`,
+        icon: 'success',
+        confirmButtonText: 'Ok'
+      })
+      return simpleUser
+    })
+      .catch((error) => console.error(error.data))
+  }
+
 
   const handleSubmitRegister = (ev) => {
     try {
       ev.preventDefault(false);
       const dataFilter = validateRegister()
-
-      Swal.fire({
-        title: 'Se envio la información',
-        text: `${JSON.stringify(dataFilter)}`,
-        icon: 'success',
-        confirmButtonText: 'Ok'
-      })
-      //TODO: Ir a login
+      submitRegister(dataFilter)
       navigate('/auth/login')
+
     } catch (error) {
       Swal.fire({
         title: 'Hay un error',
@@ -47,6 +64,22 @@ export const RegisterPage = () => {
     <section className="dataPage">
       <form className="loginForm" onSubmit={handleSubmitRegister}>
         <h1>Registrar cuenta</h1>
+        <p>Ingrese su nombre</p>
+        <input
+          onChange={onInputChange}
+          name="name"
+          value={name}
+          type="text"
+          className="form-control input" />
+
+        <p>Ingrese su apellido</p>
+        <input
+          onChange={onInputChange}
+          name="surname"
+          value={surname}
+          type="text"
+          className="form-control input" />
+
         <p>Ingrese su email</p>
         <input
           onChange={onInputChange}

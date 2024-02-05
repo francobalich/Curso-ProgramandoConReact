@@ -1,4 +1,6 @@
 export * from './Gallery'
+export * from './Image'
+export * from './Input'
 export * from './ItemNavBar'
 export * from './ItemNavBarParent'
 export * from './NavBar'

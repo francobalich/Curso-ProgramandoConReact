@@ -2,6 +2,12 @@
 export const useValidations =(user)=>{
 
   const validateRegister = () => {
+    if (user.name === '') {
+      throw new Error("¡No ingreso el nombre!");
+    }
+    if (user.surname === '') {
+      throw new Error("¡No ingreso el apellido!");
+    }
     if (user.email === '') {
       throw new Error("¡No ingreso el email!");
     }
@@ -15,6 +21,8 @@ export const useValidations =(user)=>{
       throw new Error("¡Las contraseñas no coinciden!");
     }
     return {
+      name:user.name,
+      surname:user.surname,
       email: user.email,
       pws: user.pws
     }

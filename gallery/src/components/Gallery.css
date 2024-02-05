@@ -2,13 +2,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  margin-bottom: 50px;
 }
 .gallery__container {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   min-height: 100dvh;
-  max-height: 300dvh;
+  max-height: 150dvh;
   overflow: hidden;
   align-items: center;
   gap: 10px;
@@ -16,4 +18,16 @@
 }
 .imgGallery {
   width: calc(calc(25%));
+}
+
+@media screen and (max-width:1300px) {
+  .imgGallery {
+    width: calc(calc(33%));
+  }
+}
+
+@media screen and (max-width:800px) {
+  .imgGallery {
+    width: calc(calc(50%));
+  }
 }

@@ -4,6 +4,7 @@ import { useForm, useValidations, useApi } from "../hooks";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import Swal from 'sweetalert2'
+import { Loading } from '../components/Loading';
 
 const initialState = {
   email: '',
@@ -19,7 +20,7 @@ export const LoginPage = () => {
   const [enable, setEnable] = useState(true)
 
   const submitLogin = (data) => {
-   
+
     getUserLogin(data).then((resp) => {
       const { data } = resp
       localStorage.setItem('token', data.token)
@@ -40,16 +41,19 @@ export const LoginPage = () => {
       })
     })
       .catch((error) => {
-
-       
         console.error(error.data)
       })
   }
 
   const handleSubmit = (ev) => {
-    try { 
-      setEnable(false)
+    try {
       ev.preventDefault(false);
+      setEnable(false)
+      const simpleUser = {
+        ...user,
+        state: 'checking'
+      }
+      setUser(simpleUser)
       const dataLogin = validateLogin()
       submitLogin(dataLogin)
 
@@ -61,29 +65,35 @@ export const LoginPage = () => {
         text: `${error}`,
         icon: 'error',
         confirmButtonText: 'Ok'
-      }) 
+      })
       setEnable(true)
     }
   }
   return (
     <section className="dataPage">
+
       <form className="loginForm" onSubmit={handleSubmit} disabled={!enable} >
-        <h1>Inicie sesión</h1>
-        <p>Ingrese su email</p>
-        <input
-          onChange={onInputChange}
-          name="email"
-          value={email}
-          type="email"
-          className="form-control input" />
-        <p>Ingrese su contraseña</p>
-        <input
-          onChange={onInputChange}
-          name="pws"
-          value={pws}
-          type="password"
-          className="form-control input" />
-        <button  type="submit" className="btn btn-primary">Iniciar sesión</button>
+        {
+          (user.state === 'not-authenticated') ?
+          <><h1>Inicie sesión</h1>
+            <p>Ingrese su email</p>
+            <input
+              onChange={onInputChange}
+              name="email"
+              value={email}
+              type="email"
+              className="form-control input" />
+            <p>Ingrese su contraseña</p>
+            <input
+              onChange={onInputChange}
+              name="pws"
+              value={pws}
+              type="password"
+              className="form-control input" />
+            <button type="submit" className="btn btn-primary">Iniciar sesión</button></>
+            :
+            <><Loading/></>
+        }
       </form>
     </section>
 

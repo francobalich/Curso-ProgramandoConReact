@@ -8,7 +8,7 @@ export const Gallery = () => {
   const [imgs, setImgs] = useState()
   const [page, setPage] = useState(1)
   const [word, setWord] = useState("code")
-  const { getImages } = useApi()
+  const { getImages, getFetchImages } = useApi()
 
   const addImgs = (imgData) => {
     let listOfImgs = []
@@ -21,11 +21,11 @@ export const Gallery = () => {
   }
   const loadImages = (keyword = "code") => {
     setImgs(<Loading />)
-    getImages(keyword, 30, page)
+    getFetchImages(keyword, 30, page)
       .then((list) => {
         addImgs(list)
       })
-      .catch(() => console.error("Algo salio mal"))
+      .catch((er) => console.error(er))
   }
 
   const findImages = (keyword) => {
@@ -49,7 +49,7 @@ export const Gallery = () => {
       <Input label='Ingrese lo que desea buscar' onButtonClick={findImages} />
       <div>
         <button type="button" className="btn btn-primary" onClick={() => handleCount(-1)}>-1</button>
-        <label  className="form-label m-4">   {page}   </label>
+        <label className="form-label m-4">   {page}   </label>
         <button type="button" className="btn btn-primary" onClick={() => handleCount(1)}>+1</button>
       </div>
       <div className='gallery__container'>
